@@ -27,7 +27,7 @@ namespace Assignment_2_HuffmanCodes
             public Node Right { get; set; }
         public Node (char character, int frequency, Node left, Node right)
             {
-
+                
             }
         //5 marks
         public int CompareTo (Object Obj)

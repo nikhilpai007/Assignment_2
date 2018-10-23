@@ -27,7 +27,55 @@ namespace Assignment_2_HuffmanCodes
             public Node Right { get; set; }
         public Node (char character, int frequency, Node left, Node right)
             {
-                
+
+                //Leaf 
+                if (Right == null && Left == null)
+                {
+                    if (character.Equals(this.Character))
+                    {
+                        return Data;
+                    
+                    }
+                    else
+                    {
+                        return null; 
+                    }
+                }
+                else
+                {
+                    Node left = null;
+                    Node right = null;
+
+                    if (Left != null)
+                    {
+                        Node leftPath = new Node;
+                        leftPath.AddRange(data);
+                        leftPath.Add(false);
+
+                        left = Left.Node(character, leftPath);
+                    }
+                    if (Right != null)
+                    {
+                        List Node rightPath = new List Node;
+                        rightpath.AddRange(data);
+                        rightpath.Add(true);
+                        right = Right.Node(character, rightPath);
+                    }
+
+                    if (left != null)
+                    {
+                        return left;
+                    }
+                    else
+                    {
+                        return right;
+                    }
+
+                    }
+
+
+                    }
+                }
             }
         //5 marks
         public int CompareTo (Object Obj)

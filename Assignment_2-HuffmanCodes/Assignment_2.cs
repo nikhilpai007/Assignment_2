@@ -17,6 +17,7 @@ namespace Assignment_2_HuffmanCodes
     {
         static void Main(string[] args)
         {
+            Console.Write("Hello,World!");
         }
     class Node : IComparable
         {

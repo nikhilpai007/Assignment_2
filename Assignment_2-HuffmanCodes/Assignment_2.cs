@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* 
+ * COIS 2020 - Data Structures and Algorithms, Trent Univerisity Fall 2018 
+ * Assignment 2
+ * Done by: Nikhil Pai Ganesh - 0595517 
+ *          Anuj Arora - //@anuj student number
+ * Description: Use of Huffman Tree in building a C# program 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

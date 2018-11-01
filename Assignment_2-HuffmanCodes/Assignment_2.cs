@@ -78,9 +78,9 @@ namespace Assignment_2_HuffmanCodes
                 }
             }
         //5 marks
-        public int CompareTo (Object Obj)
             {
 
+        public int CompareTo (Object Obj)
             }
         }
         class Huffman

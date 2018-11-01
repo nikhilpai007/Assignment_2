@@ -1,4 +1,15 @@
-﻿using Huffman_Tree;
+﻿/* 
+ * COIS 2020 - Data Structures and Algorithms, Trent Univerisity Fall 2018 
+ * Assignment 2
+ * Done by: Nikhil Pai Ganesh - 0595517 
+ *          Anuj Arora - 0594437
+ * Description: Use of Arrays, Hash table Dictionary and Binary Tree Algorithm to build a Huffman Tree which encodes and decodes the given string input.
+ *              It is a compression Algorithm used to narrow down the memory size of the Input string in an encoded pattern. 
+ *              However, Note that Huffman Tree is not an encryption algoritm. 
+ *              Check the demonstartion of the Source Code in the documentation attached.
+*/
+
+using Huffman_Tree;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -179,6 +190,8 @@ class Program
         // Build the Huffman tree
         huffmanTree.Build(input);
 
+        Console.WriteLine("***************************************************************************");
+
         // Encode
         BitArray encoded = huffmanTree.Encode(input);
 
@@ -193,7 +206,7 @@ class Program
         string decoded = huffmanTree.Decode(encoded);
 
         Console.WriteLine("Decoded: " + decoded);
-
+        Console.WriteLine("***************************************************************************");
         Console.ReadLine();
     }
 }

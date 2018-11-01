@@ -5,7 +5,7 @@
  *          Anuj Arora - 0594437
  * Description: Use of Arrays, Hash table Dictionary and Binary Tree Algorithm to build a Huffman Tree which encodes and decodes the given string input.
  *              It is a compression Algorithm used to narrow down the memory size of the Input string in an encoded pattern. 
- *              However, Note that Huffman Tree is not an encryption algoritm. 
+ *              However, Note that Huffman Tree is not an encryption algorithm. 
  *              Check the demonstartion of the Source Code in the documentation attached.
 */
 

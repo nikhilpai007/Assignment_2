@@ -245,6 +245,8 @@ public class Huffman
 
                 // Encode
                 BitArray decoded = huffmanTree.Decode(inbut);
+                // Problem is here
+                // At the moment it throws an exception 
 
                 Console.Write("Decoded: ");
                 foreach (bool bit in decoded)

@@ -18,19 +18,30 @@ using System.Text;
 
 namespace Huffman_Tree
 {
-    public class Node
+    public class Node // Need to make this an interface (IComparable)
     {
-        public char Symbol { get; set; }
+        public char Character { get; set; }
         public int Frequency { get; set; }
         public Node Right { get; set; }
         public Node Left { get; set; }
 
-        public List<bool> Traverse(char symbol, List<bool> data)
+        public List<bool> Traverse(char character, List<bool> data)
         {
+            /* 
+             * this.Character = character;
+             * this.Frequency = frequency; 
+             * this.Right = right;
+             * this.Left = left; 
+             * this.Data = data;
+             * 
+             */
+
+            // Insert a CompareTo Method Here and Explain the following Code in an object format 
+            // Create an Array of Frequencies
             // Leaf
             if (Right == null && Left == null)
             {
-                if (symbol.Equals(this.Symbol))
+                if (character.Equals(this.Character))
                 {
                     return data;
                 }
@@ -50,7 +61,7 @@ namespace Huffman_Tree
                     leftPath.AddRange(data);
                     leftPath.Add(false);
 
-                    left = Left.Traverse(symbol, leftPath);
+                    left = Left.Traverse(character, leftPath);
                 }
 
                 if (Right != null)
@@ -58,7 +69,7 @@ namespace Huffman_Tree
                     List<bool> rightPath = new List<bool>();
                     rightPath.AddRange(data);
                     rightPath.Add(true);
-                    right = Right.Traverse(symbol, rightPath);
+                    right = Right.Traverse(character, rightPath);
                 }
 
                 if (left != null)
@@ -74,13 +85,17 @@ namespace Huffman_Tree
     }
 }
 
-public class HuffmanTree
+// Class Huffman 
+public class Huffman
 {
     private List<Node> nodes = new List<Node>();
     public Node Root { get; set; }
-    public Dictionary<char, int> Frequencies = new Dictionary<char, int>();
+    public Dictionary<char, int> // calling a dictonary 
+                                 // Need to call Dictionary as D 
 
-    public void Build(string source)
+        Frequencies = new Dictionary<char, int>(); // frequency is referenced to the Dictionary 
+
+    public void Build(string source) // String S instead of Source 
     {
         for (int i = 0; i < source.Length; i++)
         {
@@ -94,7 +109,7 @@ public class HuffmanTree
 
         foreach (KeyValuePair<char, int> symbol in Frequencies)
         {
-            nodes.Add(new Node() { Symbol = symbol.Key, Frequency = symbol.Value });
+            nodes.Add(new Node() { Character = symbol.Key, Frequency = symbol.Value });
         }
 
         while (nodes.Count > 1)
@@ -109,7 +124,7 @@ public class HuffmanTree
                 // Create a parent node by combining the frequencies
                 Node parent = new Node()
                 {
-                    Symbol = '*',
+                    Character = '*',
                     Frequency = taken[0].Frequency + taken[1].Frequency,
                     Left = taken[0],
                     Right = taken[1]
@@ -126,6 +141,7 @@ public class HuffmanTree
 
     }
 
+    //Encoding Method 
     public System.Collections.BitArray Encode(string source)
     {
         List<bool> encodedSource = new List<bool>();
@@ -141,6 +157,7 @@ public class HuffmanTree
         return bits;
     }
 
+    //Decoding Method
     public string Decode(BitArray bits)
     {
         Node current = this.Root;
@@ -165,7 +182,7 @@ public class HuffmanTree
 
             if (IsLeaf(current))
             {
-                decoded += current.Symbol;
+                decoded += current.Character;
                 current = this.Root;
             }
         }
@@ -178,35 +195,78 @@ public class HuffmanTree
         return (node.Left == null && node.Right == null);
     }
 
-}
 
-class Program
-{
-    static void Main(string[] args)
+    class Program
     {
-        string input = "Nikhil Test";
-        HuffmanTree huffmanTree = new HuffmanTree();
-
-        // Build the Huffman tree
-        huffmanTree.Build(input);
-
-        Console.WriteLine("***************************************************************************");
-
-        // Encode
-        BitArray encoded = huffmanTree.Encode(input);
-
-        Console.Write("Encoded: ");
-        foreach (bool bit in encoded)
+        static void Main(string[] args)
         {
-            Console.Write((bit ? 1 : 0) + "");
+
+            Console.WriteLine("Enter 1 for Decode & 2 for Encode Text");
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            if (option == 1)
+            {
+                Console.Write(" Enter (Decoded) Input to Decode = >");
+                string input = Console.ReadLine();
+                Huffman huffmanTree = new Huffman();
+
+                // Build the Huffman tree
+                huffmanTree.Build(input);
+
+                Console.WriteLine("***************************************************************************************************");
+
+                // Encode
+                BitArray encoded = huffmanTree.Encode(input); // This throws exception at the moment // Error: Cannot Implicitly Convert string to System.Collections.BitArray
+
+                Console.Write("Encoded: ");
+                foreach (bool bit in encoded)
+                {
+                    Console.Write((bit ? 1 : 0) + "");
+                }
+                Console.WriteLine();
+
+                // Decode
+                string decoded = huffmanTree.Decode(encoded);
+
+                Console.WriteLine("Decoded: " + decoded);
+                Console.WriteLine("**************************************************************************************************");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.Write(" Enter (Encoded) Input to Decode = >");
+                string inbut = Console.ReadLine();
+                Huffman huffmanTree = new Huffman();
+
+                // Build the Huffman tree
+                huffmanTree.Build(inbut);
+
+                Console.WriteLine("***************************************************************************");
+
+                // Encode
+                BitArray decoded = huffmanTree.Decode(inbut);
+
+                Console.Write("Decoded: ");
+                foreach (bool bit in decoded)
+                {
+                    Console.Write((bit ? 1 : 0) + "");
+                }
+                Console.WriteLine();
+
+                // Decode
+                string encoded = huffmanTree.Decode(decoded);
+
+                Console.WriteLine("Encoded: " + encoded);
+                Console.WriteLine("***************************************************************************");
+                Console.ReadLine();
+            }
         }
-        Console.WriteLine();
+    }
 
-        // Decode
-        string decoded = huffmanTree.Decode(encoded);
-
-        Console.WriteLine("Decoded: " + decoded);
-        Console.WriteLine("***************************************************************************");
-        Console.ReadLine();
+    // this method is temporary (this needs to go as we figure out how to decode the encoding in the Main Method)
+    private BitArray Decode(string inbut)
+    {
+        throw new NotImplementedException();
     }
 }
+

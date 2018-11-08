@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assignment_2.cs" />
+    <Compile Include="..\..\..\..\OneDrive\Desktop\Assignment_2.cs">
+      <Link>Assignment_2.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
